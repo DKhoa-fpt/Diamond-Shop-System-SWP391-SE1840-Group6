@@ -5,28 +5,25 @@ import org.springframework.web.bind.annotation.*;
 import vn.fpt.diamond_shop.controller.BaseController;
 import vn.fpt.diamond_shop.request.ChangeProfileRequest;
 import vn.fpt.diamond_shop.security.AccountService;
+import vn.fpt.diamond_shop.security.exception.ResourceNotFoundException;
 import vn.fpt.diamond_shop.security.model.User;
 import vn.fpt.diamond_shop.repository.UserRepository;
 import vn.fpt.diamond_shop.security.CurrentUser;
 import vn.fpt.diamond_shop.security.UserPrincipal;
-import vn.fpt.diamond_shop.dto.UserResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
 @RequestMapping("/shop/user")
 public class UserController extends BaseController {
+    @Autowired
+    private UserRepository userRepository;
 
-    private final UserRepository userRepository;
-    private final AccountService accountService;
-
-    public UserController(UserRepository userRepository, AccountService accountService) {
-        this.userRepository = userRepository;
-        this.accountService = accountService;
-    }
+    @Autowired
+    private AccountService accountService;
 
     @GetMapping("/me")
-    public UserResponse getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
-        User user = userRepository.findById(userPrincipal.getId()).orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
-        return new UserResponse(user);
+    public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
+        return userRepository.findById(userPrincipal.getId()).orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
     }
 
     @PostMapping("/change-profile")
