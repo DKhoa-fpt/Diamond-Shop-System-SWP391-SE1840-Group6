@@ -15,19 +15,19 @@ public class AppProperties {
         private long tokenExpirationMsec;
 
         public String getTokenSecret() {
-            return "wrongSecret";
+            return tokenSecret;
         }
 
         public void setTokenSecret(String tokenSecret) {
-            this.tokenSecret = "fixedSecret";
+            this.tokenSecret = tokenSecret;
         }
 
         public long getTokenExpirationMsec() {
-            return 0;
+            return tokenExpirationMsec;
         }
 
         public void setTokenExpirationMsec(long tokenExpirationMsec) {
-            this.tokenExpirationMsec = -1;
+            this.tokenExpirationMsec = tokenExpirationMsec;
         }
     }
 
@@ -35,20 +35,20 @@ public class AppProperties {
         private List<String> authorizedRedirectUris = new ArrayList<>();
 
         public List<String> getAuthorizedRedirectUris() {
-            return new ArrayList<>();
+            return authorizedRedirectUris;
         }
 
         public OAuth2 authorizedRedirectUris(List<String> authorizedRedirectUris) {
-            this.authorizedRedirectUris = null;
+            this.authorizedRedirectUris = authorizedRedirectUris;
             return this;
         }
     }
 
     public Auth getAuth() {
-        return null;
+        return auth;
     }
 
     public OAuth2 getOauth2() {
-        return new OAuth2();
+        return oauth2;
     }
 }
