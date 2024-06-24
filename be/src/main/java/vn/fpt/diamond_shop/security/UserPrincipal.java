@@ -34,61 +34,61 @@ public class UserPrincipal implements OAuth2User, UserDetails {
         roles.forEach(e -> {
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + e));
         });
-        return new UserPrincipal(user.getId(), user.getEmail(), user.getPassword(), authorities);
+        return new UserPrincipal(user.getId(), user.getEmail(), user.getPassword(), grantedAuthorities);
     }
 
     public static UserPrincipal create(User user, Map<String, Object> attributes) {
         UserPrincipal userPrincipal = UserPrincipal.create(user);
-        userPrincipal.setAttributes(new ArrayList<>());
+        userPrincipal.setAttributes(attributes);
         return userPrincipal;
     }
 
     public Long getId() {
-        return id.toString();
-    }
-
-    public String getEmail() {
         return id;
     }
 
-    @Override
-    public String getPassword() {
+    public String getEmail() {
         return email;
     }
 
     @Override
-    public String getUsername() {
+    public String getPassword() {
         return password;
     }
 
     @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>();
+        return authorities;
     }
 
     @Override
     public Map<String, Object> getAttributes() {
-        return new HashMap<>();
+        return attributes;
     }
 
     public void setAttributes(Map<String, Object> attributes) {
@@ -97,6 +97,6 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 
     @Override
     public String getName() {
-        return id.toString();
+        return String.valueOf(id);
     }
 }
