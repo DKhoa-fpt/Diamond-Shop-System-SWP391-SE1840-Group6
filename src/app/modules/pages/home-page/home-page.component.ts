@@ -1,13 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-
+import {ProductService} from "../../service/product.service";
+import {ToastrService} from "ngx-toastr";
+import {NumberService} from "../../service/number.service";
+import {AccountService} from "../../auth/services/account.service";
+import {AuthGoogleService} from "../../../core/shared/auth-google.service";
+import {CartService} from "../../service/cart.service";
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent {
   isLoginUser:boolean = false;
   listProduct:any[]
   rings: any[]
@@ -41,6 +46,9 @@ export class HomePageComponent implements OnInit {
       });
     } else {
       this.isLoginUser = localStorage.getItem("user") != null;
+      if(this.isLoginUser) {
+        this.getProductCart();
+      }
     }
     this.getProducts();
   }
@@ -59,7 +67,7 @@ export class HomePageComponent implements OnInit {
     return this.numberFormat.convertNumber(number);
   }
   goToProductDetail(id:number) {
-    const returnUrl = this.route.snapshot.queryParams[`/ecommerce?id=${id}`] || `/ecommerce?id=${id}`;
+    const returnUrl = this.route.snapshot.queryParams[`/product?id=${id}`] || `/product?id=${id}`;
     this.router.navigateByUrl(returnUrl);
   }
 
@@ -95,31 +103,31 @@ export class HomePageComponent implements OnInit {
       }
   getProductCart() {
     const request = {
-      customer_id : 1
+      customer_id : null
     }
     this.cartService.getProductInCart(request).subscribe((res) =>{
       this.cartService.cartItems.next(res?.data);
       this.cartService.totalProductInCart.next(this.cartService.getTotalProduct(res?.data));
-      this.cartService.totalPrice.next(this.cartService.getTotalPriceV2(res?.data));
+      // this.cartService.totalPrice.next(this.cartService.getTotalPriceV2(res?.data));
     }, error => {
 
     })
   }
   getProductCartV2(token:any) {
     const request = {
-      customer_id : 1
+      customer_id : null
     }
     this.cartService.getProductInCartV2(request,token).subscribe((res) =>{
       this.cartService.cartItems.next(res?.data);
       this.cartService.totalProductInCart.next(this.cartService.getTotalProduct(res?.data));
-      this.cartService.totalPrice.next(this.cartService.getTotalPriceV2(res?.data));
+      // this.cartService.totalPrice.next(this.cartService.getTotalPriceV2(res?.data));
     }, error => {
 
     })
   }
   addProductCart(product:any){
     if(!this.isLoginUser) {
-      this.toastrService.error("Bạn phải đăng nhập trước");
+      this.toastrService.error("You are login first");
       return;
     }
     const request = {
@@ -127,10 +135,10 @@ export class HomePageComponent implements OnInit {
       quantity : 1
     }
     this.cartService.addProductToCard(request).subscribe((res) =>{
-      this.toastrService.success("Add sản phầm thành công");
+      this.toastrService.success("Add product to cart success");
       this.getProductCart();
     }, error => {
-      this.toastrService.error("Add sản phầm thất bại");
+      this.toastrService.error("Add product to cart fail");
     });
   }
 
