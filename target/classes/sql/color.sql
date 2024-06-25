@@ -1,0 +1,15 @@
+INSERT INTO diamond_shop.color (color, create_at, update_at) VALUES ('M_N', '2024-05-10 15:14:36', null);
+INSERT INTO diamond_shop.color (color, create_at, update_at) VALUES ('D', '2024-05-10 15:14:32', null);
+INSERT INTO diamond_shop.color (color, create_at, update_at) VALUES ('L', '2024-05-10 15:14:34', null);
+INSERT INTO diamond_shop.color (color, create_at, update_at) VALUES ('H', '2024-05-10 15:14:33', null);
+INSERT INTO diamond_shop.color (color, create_at, update_at) VALUES ('K_L', '2024-05-10 15:14:36', null);
+INSERT INTO diamond_shop.color (color, create_at, update_at) VALUES ('I', '2024-05-10 15:14:33', null);
+INSERT INTO diamond_shop.color (color, create_at, update_at) VALUES ('G_H', '2024-05-10 15:14:35', null);
+INSERT INTO diamond_shop.color (color, create_at, update_at) VALUES ('F', '2024-05-10 15:14:32', null);
+INSERT INTO diamond_shop.color (color, create_at, update_at) VALUES ('K', '2024-05-10 15:14:33', null);
+INSERT INTO diamond_shop.color (color, create_at, update_at) VALUES ('J', '2024-05-10 15:14:33', null);
+INSERT INTO diamond_shop.color (color, create_at, update_at) VALUES ('I_J', '2024-05-10 15:14:35', null);
+INSERT INTO diamond_shop.color (color, create_at, update_at) VALUES ('N', '2024-05-10 15:14:34', null);
+INSERT INTO diamond_shop.color (color, create_at, update_at) VALUES ('M', '2024-05-10 15:14:34', null);
+INSERT INTO diamond_shop.color (color, create_at, update_at) VALUES ('D_F', '2024-05-10 15:14:35', null);
+INSERT INTO diamond_shop.color (color, create_at, update_at) VALUES ('G', '2024-05-10 15:14:32', null);
