@@ -1,0 +1,284 @@
+<app-header [enableSearch] = 'false'></app-header>
+<div class="container" id = 'main-container'>
+  <div class="row flex-lg-nowrap">
+    <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
+      <div class="card p-3">
+        <div class="e-navlist e-navlist--active-bg">
+          <ul class="nav">
+            <li class="nav-item"><a class="nav-link px-2 active" href="#"><i class="fa fa-fw fa-bar-chart mr-1"></i><span>Overview</span></a></li>
+            <li class="nav-item"><a class="nav-link px-2" href="https://www.bootdey.com/snippets/view/bs4-crud-users" target="__blank"><i class="fa fa-fw fa-th mr-1"></i><span>CRUD</span></a></li>
+            <li class="nav-item"><a class="nav-link px-2" href="https://www.bootdey.com/snippets/view/bs4-edit-profile-page" target="__blank"><i class="fa fa-fw fa-cog mr-1"></i><span>Settings</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="row">
+        <div class="col mb-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="e-profile">
+                <div class="row">
+                  <div class="col-12 col-sm-auto mb-3">
+                    <div class="mx-auto" style="width: 140px;">
+                      <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
+                        <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;"><img style="width: 140px;height: 140px" src="{{urlImg}}"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                    <div class="text-center text-sm-left mb-2 mb-sm-0">
+                      <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{f['full_name'].value}}</h4>
+                      <p class="mb-0">{{f['full_name'].value}}</p>
+<!--                      <div class="text-muted"><small>Last seen 2 hours ago</small></div>-->
+                      <div class="mt-2">
+                        <button class="btn btn-primary" type="button" (click)="moveToUploadFile()">
+                          <i class="fa fa-fw fa-camera"></i>
+                          <span>Change Photo</span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="text-center text-sm-right">
+                      <span class="badge badge-secondary">administrator</span>
+                      <div class="text-muted"><small>Joined 09 Dec 2017</small></div>
+                    </div>
+                  </div>
+                </div>
+                <ul class="nav nav-tabs">
+                  <li class="nav-item"><a href="" class="active nav-link">Settings</a></li>
+                </ul>
+                <form class="form" [formGroup]="form">
+                  <div class="row">
+                    <div class="col">
+                      <div class="row">
+                        <div class="col">
+                          <div class="form-group">
+                            <label>Họ và Tên</label>
+                            <input class="form-control" type="text" formControlName="full_name">
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-group">
+                            <label>SĐT:</label>
+                            <input class="form-control" type="text" formControlName="phone_number">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <div class="form-group">
+                            <label>Tuổi</label>
+                            <input class="form-control" type="text" formControlName="age">
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-group">
+                            <label>Ngày sinh</label>
+                            <input class="form-control" type="text" formControlName="date_of_birth">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <div class="form-group">
+                            <label>Email</label>
+                            <input [disabled]="true" formControlName="email" class="form-control" type="text" placeholder="user@example.com">
+                          </div>
+                        </div>
+                      </div>
+                      <label>Địa chỉ</label>
+                      <div class="row">
+                        <div class="col">
+                          <div class="form-group">
+                            <label>Tỉnh thành</label>
+                            <input class="form-control" type="text" formControlName="province" >
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-group">
+                            <label>Quận huyện</label>
+                            <input class="form-control" type="text" formControlName="district">
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-group">
+                            <label>Phường xã</label>
+                            <input class="form-control" type="text" formControlName="ward">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <div class="form-group">
+                            <label>Địa chỉ cụ thể</label>
+                            <input class="form-control" type="text" formControlName="extra" placeholder="Số nhà...">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col mb-3">
+                          <div class="form-group">
+                            <label>About</label>
+                            <textarea class="form-control" rows="5" placeholder="My Bio"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--                      <div class="row">-->
+                  <!--                        <div class="col-12 col-sm-6 mb-3">-->
+                  <!--                          <div class="mb-2"><b>Change Password</b></div>-->
+                  <!--                          <div class="row">-->
+                  <!--                            <div class="col">-->
+                  <!--                              <div class="form-group">-->
+                  <!--                                <label>Current Password</label>-->
+                  <!--                                <input class="form-control" type="password" placeholder="••••••">-->
+                  <!--                              </div>-->
+                  <!--                            </div>-->
+                  <!--                          </div>-->
+                  <!--                          <div class="row">-->
+                  <!--                            <div class="col">-->
+                  <!--                              <div class="form-group">-->
+                  <!--                                <label>New Password</label>-->
+                  <!--                                <input class="form-control" type="password" placeholder="••••••">-->
+                  <!--                              </div>-->
+                  <!--                            </div>-->
+                  <!--                          </div>-->
+                  <!--                          <div class="row">-->
+                  <!--                            <div class="col">-->
+                  <!--                              <div class="form-group">-->
+                  <!--                                <label>Confirm <span class="d-none d-xl-inline">Password</span></label>-->
+                  <!--                                <input class="form-control" type="password" placeholder="••••••"></div>-->
+                  <!--                            </div>-->
+                  <!--                          </div>-->
+                  <!--                        </div>-->
+                  <!--                        <div class="col-12 col-sm-5 offset-sm-1 mb-3">-->
+                  <!--                          <div class="mb-2"><b>Keeping in Touch</b></div>-->
+                  <!--                          <div class="row">-->
+                  <!--                            <div class="col">-->
+                  <!--                              <label>Email Notifications</label>-->
+                  <!--                              <div class="custom-controls-stacked px-2">-->
+                  <!--                                <div class="custom-control custom-checkbox">-->
+                  <!--                                  <input type="checkbox" class="custom-control-input" id="notifications-blog" checked="">-->
+                  <!--                                  <label class="custom-control-label" for="notifications-blog">Blog posts</label>-->
+                  <!--                                </div>-->
+                  <!--                                <div class="custom-control custom-checkbox">-->
+                  <!--                                  <input type="checkbox" class="custom-control-input" id="notifications-news" checked="">-->
+                  <!--                                  <label class="custom-control-label" for="notifications-news">Newsletter</label>-->
+                  <!--                                </div>-->
+                  <!--                                <div class="custom-control custom-checkbox">-->
+                  <!--                                  <input type="checkbox" class="custom-control-input" id="notifications-offers" checked="">-->
+                  <!--                                  <label class="custom-control-label" for="notifications-offers">Personal Offers</label>-->
+                  <!--                                </div>-->
+                  <!--                              </div>-->
+                  <!--                            </div>-->
+                  <!--                          </div>-->
+                  <!--                        </div>-->
+                  <!--                      </div>-->
+                  <div class="row">
+                    <div class="col d-flex justify-content-end">
+                      <button class="btn btn-primary" type="submit" (click)="onUpdate()">Save Changes</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-3 mb-3">
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="px-xl-3">
+                <button class="btn btn-block btn-secondary" (click)="logOut()">
+                  <i class="fa fa-sign-out"></i>
+                  <span>Logout</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title font-weight-bold">Support</h6>
+              <p class="card-text">Get fast, free help from our friendly assistants.</p>
+              <button type="button" class="btn btn-primary">Contact Us</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="upLoadModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModelLabel">Upload File</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container" style="width:600px">
+          <div class="my-3">
+            <h3>Upload Avatar</h3>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <label class="btn btn-default p-0">
+                <input type="file" accept="image/*" (change)="selectFile($event)" />
+              </label>
+            </div>
+
+            <div class="col-4">
+
+            </div>
+          </div>
+
+          <div>
+            <img [src]="preview" class="preview">
+          </div>
+
+          <div *ngIf="currentFile && progress" class="progress my-3" style="max-width: 200px">
+            <div
+              class="progress-bar progress-bar-info"
+              role="progressbar"
+              attr.aria-valuenow="{{ progress }}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              [ngStyle]="{ width: progress + '%' }"
+            >
+              {{ progress }}%
+            </div>
+          </div>
+
+          <div *ngIf="message" class="alert alert-secondary" role="alert">
+            {{ message }}
+          </div>
+
+          <!--  <div class="card mt-3">-->
+          <!--    <div class="card-header">List of Images</div>-->
+          <!--    <ul class="list-group list-group-flush">-->
+          <!--      <li *ngFor="let image of imageInfos | async" class="list-group-item">-->
+          <!--        <p><a href="{{ image.url }}">{{ image.name }}</a></p>-->
+          <!--        <img src="{{ image.url }}" alt="{{ image.name }}" height="80px" />-->
+          <!--      </li>-->
+          <!--    </ul>-->
+          <!--  </div>-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" #closeButton data-dismiss="modal">No</button>
+          <button
+            class="btn btn-danger" data-dismiss="modal"
+            [disabled]="!selectedFiles"
+            (click)="upload()"
+          >
+            Upload
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
