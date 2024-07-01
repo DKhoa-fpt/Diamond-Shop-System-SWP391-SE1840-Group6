@@ -33,6 +33,24 @@ public class AuthController extends BaseController {
     @Autowired
     private UserRepository userRepository;
 
+    @PostMapping("/login")
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPass()));
+        SecurityContextHolder.getContext().setAuthentication(null);
+        Object userPrincipal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (!userRepository.findById(userPrincipal.getId()).get().isActive()) {
+            throw new ResponseStatusException(HttpStatus.OK, "Account is deaactive");
+        }
+
+        List<SimpleGrantedAuthority> authorities = (List<SimpleGrantedAuthority>) userPrincipal.getAuthorities();
+        String role = authorities.iterator().next().getAuthority();
+
+        String token = tokenProvider.createToken(null);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new AuthResponse(token, role));
+    }
+
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
 
