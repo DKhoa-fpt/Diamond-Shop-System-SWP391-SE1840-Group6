@@ -36,19 +36,21 @@ public class AuthController extends BaseController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPass()));
-        SecurityContextHolder.getContext().setAuthentication(null);
-        Object userPrincipal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
 
         if (!userRepository.findById(userPrincipal.getId()).get().isActive()) {
-            throw new ResponseStatusException(HttpStatus.OK, "Account is deaactive");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Account is deaactive");
         }
 
-        List<SimpleGrantedAuthority> authorities = (List<SimpleGrantedAuthority>) userPrincipal.getAuthorities();
+        Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) userPrincipal
+                .getAuthorities();
         String role = authorities.iterator().next().getAuthority();
 
-        String token = tokenProvider.createToken(null);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new AuthResponse(token, role));
+        String token = tokenProvider.createToken(authentication);
+        return ResponseEntity.ok(new AuthResponse(token, role));
     }
 
     @PostMapping("/signup")
